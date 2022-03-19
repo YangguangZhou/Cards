@@ -79,7 +79,7 @@ async function getSocial() {
         if (icons.includes(key))
             can.push(key);
 
-    var margin = 40;
+    var margin = 25;
     var sp = (170 - margin) / can.length;
 
     for (var i = 0; i < can.length; i++) {
