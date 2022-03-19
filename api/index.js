@@ -144,7 +144,7 @@ module.exports = async (req, res) => {
         weekday    = getWeekday(),
         toStr      = getStr(),
         toDur      = getDur(),
-        quote_     = getParam("quote") || "✨✨",
+        quote_     = getParam("quote") || "永远相信美好的事情即将发生✨",
         fontColor  = "rgba(" + (getParam("color") || "51,51,51,1") + ")",
         bgColor    = "rgba(" + (getParam("bg") || "0,0,0,0") + ")"
     } = req.query;
