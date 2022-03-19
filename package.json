@@ -1,0 +1,25 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "个人名片 Cards",
+  "main": "index.js",
+  "dependencies": {
+    "ip": "^1.1.5",
+    "moment": "^2.29.1",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YangguangZhou/Cards.git"
+  },
+  "author": "'YangguangZhou' <yangguangzhousunny@163.com> (https://jerryz.com.cn/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YangguangZhou/Cards/issues"
+  },
+  "homepage": "https://github.com/YangguangZhou/Cards#readme"
+}
