@@ -1,5 +1,5 @@
 {
-  "name": "api",
+  "name": "cards",
   "version": "1.0.0",
   "description": "个人名片 Cards",
   "main": "index.js",
