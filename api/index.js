@@ -6,9 +6,10 @@ var param;
 const prefix = "http://cards.jerryz.com.cn";
 const offset = [0, 0, 4.8, 2.7];
 const icons = [
-    "site",
     "wechat",
     "qq",
+    "site",
+    "phone",
     "email",
     "github",
     "gitee",
@@ -25,8 +26,7 @@ const icons = [
     "alipay",
     "csdn",
     "douban",
-    "taobao",
-    "jianshu"
+    "taobao"
 ];
 
 function getParam(str) {

@@ -1,8 +1,9 @@
 const baseURL = "https://cards.jerryz.com.cn/api";
 const icons = [
-    "site",
     "wechat",
     "qq",
+    "site",
+    "phone",
     "email",
     "github",
     "gitee",
@@ -19,8 +20,7 @@ const icons = [
     "alipay",
     "csdn",
     "douban",
-    "taobao",
-    "jianshu"
+    "taobao"
 ];
 
 function toggleBorder() {
