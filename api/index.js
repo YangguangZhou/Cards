@@ -145,7 +145,7 @@ module.exports = async (req, res) => {
         toStr      = getStr(),
         toDur      = getDur(),
         quote_     = getParam("quote") || "永远相信美好的事情即将发生✨",
-        fontColor  = "rgba(" + (getParam("color") || "51,51,51,1") + ")",
+        fontColor  = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
         bgColor    = "rgba(" + (getParam("bg") || "0,0,0,0") + ")"
     } = req.query;
 

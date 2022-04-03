@@ -40,7 +40,7 @@ var vm = new Vue({
         image: baseURL,
         params: "",
         background: "#1",
-        text_color: "rgba(51, 51, 51, 1)",
+        text_color: "rgba(0, 0, 0, 1)",
         bg_color: "rgba(0, 0, 0, 0)",
         date: new Date().getFullYear() + "-12-31",
         str: "",
