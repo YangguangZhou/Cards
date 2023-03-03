@@ -6,9 +6,9 @@
   "dependencies": {
     "ip": "^1.1.5",
     "moment": "^2.29.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "yarn": "^1.22.19"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

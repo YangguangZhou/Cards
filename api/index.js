@@ -13,11 +13,14 @@ const icons = [
     "email",
     "github",
     "gitee",
+    "coolapk",
     "bilibili",
     "zhihu",
     "weibo",
+    "tiktok",
     "twitter",
     "facebook",
+    "instagram",
     "google",
     "microsoft",
     "luogu",
@@ -55,7 +58,7 @@ function getBGOffset() {
 
 function readImage(url) {
     return new Promise((resolve, reject) => {
-        request({url: url, encoding: "binary"}, function (err, resp, body) {
+        request({ url: url, encoding: "binary" }, function (err, resp, body) {
             if (!err && resp.statusCode == 200) resolve('data:image/png;base64,' + Buffer.from(body, 'binary').toString('base64'));
             else reject(err);
         });
@@ -135,18 +138,18 @@ module.exports = async (req, res) => {
     res.setHeader("Content-Type", "image/svg+xml");
     const {
         background = await readImage(`${prefix}/res/bg/${getBG()}.png`),
-        bg_offset  = 250 - getBGOffset(),
+        bg_offset = 250 - getBGOffset(),
         socialText = await getSocial(),
-        dayOfYear  = moment().dayOfYear(),
-        year       = moment().year(),
-        month      = moment().format('M'),
-        day        = moment().format('D'),
-        weekday    = getWeekday(),
-        toStr      = getStr(),
-        toDur      = getDur(),
-        quote_     = getParam("quote") || "永远相信美好的事情即将发生✨",
-        fontColor  = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
-        bgColor    = "rgba(" + (getParam("bg") || "0,0,0,0") + ")"
+        dayOfYear = moment().dayOfYear(),
+        year = moment().year(),
+        month = moment().format('M'),
+        day = moment().format('D'),
+        weekday = getWeekday(),
+        toStr = getStr(),
+        toDur = getDur(),
+        quote_ = getParam("quote") || "永远相信美好的事情即将发生✨",
+        fontColor = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
+        bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")"
     } = req.query;
 
     res.send(`
