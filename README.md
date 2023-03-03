@@ -8,7 +8,7 @@
 
 ![](https://card.jerryz.com.cn/white)
 
-版权所有 © 2021 - 2022 YangguangZhou
+版权所有 © 2021 - 2023 YangguangZhou
 
 如果想要自行试验或者二次开发可以自行部署到自己的 vercel 服务器，登录 [vercel](https://vercel.com/) 后，点击下方按钮即可部署。
 
