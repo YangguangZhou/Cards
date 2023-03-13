@@ -100,8 +100,10 @@ function getDur() {
     var date = getParam("date") || "";
     if (date == "")
         date = `${moment().year()}-12-31`;
-    var ret = -moment().diff(date, 'd')
-    if (ret >= 0) return `还有 ${ret} 天`;
+    var ret = -moment().diff(date, 'days')
+    var today = moment(new Date()).format('YYYY-MM-DD')
+    if (date == today) return `还有 0 天`;
+    else if (ret >= 0) return `还有 ${ret+1} 天`;
     else return `已经过去 ${-ret} 天`;
 }
 
