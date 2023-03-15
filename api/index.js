@@ -142,7 +142,7 @@ module.exports = async (req, res) => {
         background = await readImage(`${prefix}/res/bg/${getBG()}.png`),
         bg_offset = 250 - getBGOffset(),
         socialText = await getSocial(),
-        dayOfYear = moment().dayOfYear(),
+        dayOfYear = moment().dayOfYear()-1,
         year = moment().year(),
         month = moment().format('M'),
         day = moment().format('D'),
