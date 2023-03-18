@@ -83,7 +83,7 @@ async function getSocial() {
             can.push(key);
 
     var margin = 25;
-    var sp = (165 - margin) / can.length;
+    var sp = (175 - margin) / can.length;
 
     for (var i = 0; i < can.length; i++) {
         ret += `
