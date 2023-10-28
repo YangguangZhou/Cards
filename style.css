@@ -1,7 +1,9 @@
-@import url('https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url(https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);
 
 * {
-    font-family: "EB Garamond", source-han-serif-sc, "source han serif sc", "source han serif cn", "source han serif tc", "source han serif tw", "source han serif", "simsun", songti sc, microsoft yahei, serif;
+    font-family: "EB Garamond", source-han-serif-sc, "source han serif sc",
+        "source han serif cn", "source han serif tc", "source han serif tw",
+        "source han serif", "simsun", songti sc, microsoft yahei, serif;
 }
 
 ::-webkit-scrollbar {
@@ -9,7 +11,8 @@
     height: 0 !important;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     margin: 0;
@@ -31,10 +34,9 @@ html, body {
 
 .image {
     cursor: pointer;
-    width: 100%;
-    max-width: 500px;
-    height: auto;
-    margin: 0 auto;
+    width: 500px;
+    height: 180px;
+    left: calc(50% - 230px);
     border: 1px solid #ebebeb;
     border-radius: 3px;
     transition: 0.3s;
@@ -52,48 +54,70 @@ html, body {
 }
 
 .placeholder {
+    left: calc(50% - 230px);
     text-align: center;
     height: 180px;
     line-height: 180px;
     padding: 0;
     margin: 0;
+    width: 500px;
 }
 
 .social {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 250px;
+    display: inline-flex;
+    width: 250px;
     margin: 0 0 7px 0;
 }
 
 .social img {
     width: 30px;
     height: 30px;
+    display: inline;
     margin: 5px;
     margin-right: 10px;
 }
 
 .social input {
-    flex-grow: 1;
+    display: inline;
     width: 100%;
 }
 
 .el-row {
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 100%;
+    width: calc(100% + 127px);
 }
 
-.counter, .help, .copyright {
+.counter {
+    text-align: center;
+    margin-top: 10px;
+    color: #999;
+    font-size: 14px;
+}
+
+.help {
     text-align: center;
     margin: 15px 0;
     color: #999;
     font-size: 14px;
 }
 
-.counter span, .help, .copyright a {
-    margin: 0 5px;
+.copyright {
+    text-align: center;
+    margin: 15px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.copyright a {
+    text-decoration: none;
+    font-weight: bold;
+    color: unset;
+    transition: opacity .2s;
+}
+
+.copyright a:hover {
+    opacity: .5;
 }
 
 .title {
@@ -108,25 +132,26 @@ html, body {
 }
 
 @keyframes octocat-wave {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: rotate(0);
     }
 
-    20%, 60% {
+    20%,
+    60% {
         transform: rotate(-25deg);
     }
 
-    40%, 80% {
+    40%,
+    80% {
         transform: rotate(10deg);
     }
 }
 
-@media (max-width: 768px) {
-    .image {
-        width: 100%;
-        max-width: none;
-        height: auto;
-        margin: 0 auto;
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
     }
 
     .github-corner .octo-arm {
