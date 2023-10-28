@@ -52,40 +52,40 @@ var vm = new Vue({
         social: [],
     },
     watch: {
-        background: (e) => {
+        background: function(e) {
             vm.setParam("img", e.slice(1));
         },
 
-        params: (e) => {
+        params: function(e) {
             vm.image = baseURL + (e ? "?" + e : "");
         },
 
-        text_color: (e) => {
+        text_color: function(e) {
             vm.setParam("color", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
-        bg_color: (e) => {
+        bg_color: function(e) {
             vm.setParam("bg", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
-        date: (e) => {
+        date: function(e) {
             vm.setParam("date", e);
         },
 
-        str: (e) => {
+        str: function(e) {
             vm.setParam("str", e);
         },
 
-        quote: (e) => {
+        quote: function(e) {
             vm.setParam("quote", e);
         },
 
-        social: (e) => {
+        social: function(e) {
             for (var i = 0; i < e.length; i++) vm.setParam(icons[i], e[i]);
         },
     },
     methods: {
-        setParam(key, value) {
+        setParam: function(key, value) {
             var tmp = new URLSearchParams(vm.params);
             if (!value) tmp.delete(key);
             else tmp.set(key, value
@@ -95,7 +95,7 @@ var vm = new Vue({
             vm.params = tmp.toString();
         },
 
-        open() {
+        open: function() {
             window.open(vm.image, "_blank");
         }
     },

@@ -1,49 +1,47 @@
-@import url(https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap);
+@import url('https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 * {
     font-family: "EB Garamond", source-han-serif-sc, "source han serif sc",
         "source han serif cn", "source han serif tc", "source han serif tw",
         "source han serif", "simsun", songti sc, microsoft yahei, serif;
+    box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-}
-
-html,
 body {
-    height: 100%;
-    width: 100%;
+    font-size: 16px;
     margin: 0;
     padding: 0;
-    user-select: none;
-    overflow-x: hidden;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 15px;
 }
 
 #app {
-    margin-top: 17px;
-    display: inline-block;
-    width: 100%;
-    max-width: 961px;
-    left: 50%;
-    position: relative;
-    transform: translate(-50%, 0);
+    margin-top: 50px;
+    text-align: center;
     color: #333;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 .image {
     cursor: pointer;
-    width: 500px;
-    height: 180px;
-    left: calc(50% - 230px);
+    max-width: 100%;
+    height: auto;
     border: 1px solid #ebebeb;
     border-radius: 3px;
     transition: 0.3s;
 }
 
 .image:hover {
-    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .text {
@@ -54,77 +52,53 @@ body {
 }
 
 .placeholder {
-    left: calc(50% - 230px);
     text-align: center;
     height: 180px;
     line-height: 180px;
     padding: 0;
     margin: 0;
-    width: 500px;
 }
 
 .social {
-    display: inline-flex;
-    width: 250px;
-    margin: 0 0 7px 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 7px;
 }
 
 .social img {
     width: 30px;
     height: 30px;
-    display: inline;
-    margin: 5px;
     margin-right: 10px;
 }
 
 .social input {
-    display: inline;
-    width: 100%;
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 .el-row {
-    margin-top: 10px;
     margin-bottom: 10px;
-    width: calc(100% + 127px);
 }
 
-.counter {
-    text-align: center;
-    margin-top: 10px;
-    color: #999;
-    font-size: 14px;
-}
-
-.help {
-    text-align: center;
-    margin: 15px 0;
-    color: #999;
-    font-size: 14px;
-}
-
+.counter,
+.help,
 .copyright {
-    text-align: center;
-    margin: 15px 0;
-    color: #999;
     font-size: 14px;
+    color: #999;
+    margin: 15px 0;
 }
 
-.copyright a {
+a {
     text-decoration: none;
     font-weight: bold;
-    color: unset;
-    transition: opacity .2s;
+    color: inherit;
+    transition: opacity 0.2s;
 }
 
-.copyright a:hover {
-    opacity: .5;
-}
-
-.title {
-    text-align: center;
-    font-size: 50px;
-    margin-bottom: 20px;
-    width: 100%;
+a:hover {
+    opacity: 0.5;
 }
 
 .github-corner:hover .octo-arm {
