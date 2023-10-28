@@ -1,9 +1,5 @@
-@import url('https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 * {
-    font-family: "EB Garamond", source-han-serif-sc, "source han serif sc",
-        "source han serif cn", "source han serif tc", "source han serif tw",
-        "source han serif", "simsun", songti sc, microsoft yahei, serif;
+    font-family: "Microsoft YaHei", sans-serif;
     box-sizing: border-box;
 }
 
@@ -73,7 +69,7 @@ body {
 
 .social input {
     flex: 1;
-    padding: 5px;
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
