@@ -142,7 +142,7 @@ module.exports = async (req, res) => {
         quote_ = getParam("quote") || "永远相信美好的事情即将发生✨",
         fontColor = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
         bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")",
-        welcomeText = counter ? `欢迎您，第${counter}位访问本页面的朋友 🎉` : '欢迎您朋友 🎉'
+        welcomeText = counter ? `欢迎您，第 ${counter} 位访问本页面的朋友 🎉` : '欢迎您朋友 🎉'
     } = req.query;
 
     res.send(`
