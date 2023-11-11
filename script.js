@@ -1,30 +1,5 @@
 const baseURL = "https://cards.jerryz.com.cn/api";
-const icons = [
-    "wechat",
-    "qq",
-    "site",
-    "phone",
-    "email",
-    "github",
-    "gitee",
-    "coolapk",
-    "bilibili",
-    "zhihu",
-    "weibo",
-    "tiktok",
-    "twitter",
-    "telegram",
-    "facebook",
-    "instagram",
-    "google",
-    "microsoft",
-    "luogu",
-    "codeforces",
-    "alipay",
-    "csdn",
-    "douban",
-    "taobao"
-];
+const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
 
 function toggleBorder() {
     !window.TOG &&
@@ -52,40 +27,40 @@ var vm = new Vue({
         social: [],
     },
     watch: {
-        background: function(e) {
+        background: function (e) {
             vm.setParam("img", e.slice(1));
         },
 
-        params: function(e) {
+        params: function (e) {
             vm.image = baseURL + (e ? "?" + e : "");
         },
 
-        text_color: function(e) {
+        text_color: function (e) {
             vm.setParam("color", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
-        bg_color: function(e) {
+        bg_color: function (e) {
             vm.setParam("bg", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
-        date: function(e) {
+        date: function (e) {
             vm.setParam("date", e);
         },
 
-        str: function(e) {
+        str: function (e) {
             vm.setParam("str", e);
         },
 
-        quote: function(e) {
+        quote: function (e) {
             vm.setParam("quote", e);
         },
 
-        social: function(e) {
+        social: function (e) {
             for (var i = 0; i < e.length; i++) vm.setParam(icons[i], e[i]);
         },
     },
     methods: {
-        setParam: function(key, value) {
+        setParam: function (key, value) {
             var tmp = new URLSearchParams(vm.params);
             if (!value) tmp.delete(key);
             else tmp.set(key, value
@@ -95,7 +70,7 @@ var vm = new Vue({
             vm.params = tmp.toString();
         },
 
-        open: function() {
+        open: function () {
             window.open(vm.image, "_blank");
         }
     },
