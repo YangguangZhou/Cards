@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
-const offset = [0, 0, 4.8, 2.7, 0, 0];
+const offset = [0, 0, 4.8, 2.7, 0];
 const icons = [
     "wechat",
     "qq",
@@ -47,7 +47,7 @@ function trans(text) {
 
 function getBG() {
     var ret = 1;
-    if (getParam("img") && +getParam("img") >= 1 && +getParam("img") <= 5)
+    if (getParam("img") && +getParam("img") >= 1 && +getParam("img") <= 4)
         ret = +getParam("img");
     return ret;
 }
