@@ -105,6 +105,23 @@ function getWeekday() {
     return ret;
 }
 
+const fetch = require('node-fetch');
+
+async function getCounter() {
+    const url = "https://counter.jerryz.com.cn/api/counter";
+    const name = "counter";
+    const data = { name };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    const result = await response.json();
+    return result.times;
+}
+
 module.exports = async (req, res) => {
     if (!req.url.includes("Jerry Zhou"))
         console.log("[Running] " + decodeURI(req.url));
@@ -126,7 +143,9 @@ module.exports = async (req, res) => {
         toDur = getDur(),
         quote_ = getParam("quote") || "永远相信美好的事情即将发生✨",
         fontColor = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
-        bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")"
+        bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")",
+        counter = await getCounter(),
+        welcomeText = counter ? `欢迎您，第${counter}位访问本页面的朋友 🎉` : '欢迎您朋友 🎉'
     } = req.query;
 
     res.send(`
@@ -149,7 +168,7 @@ module.exports = async (req, res) => {
     </g>
     
     <g id="detail">
-        <text class="text" transform="translate(20 35)">欢迎您朋友 🎉</text>
+        <text class="text" transform="translate(20 35)">${welcomeText}</text>
         <text class="text" transform="translate(20 65)">今天是 ${month} 月 ${day} 日，${weekday}</text>
         <text class="text" transform="translate(20 95)">也是 ${year} 年的第 ${dayOfYear} 天</text>
         <text class="text" transform="translate(20 125)">距离${toStr}${toDur}</text>
