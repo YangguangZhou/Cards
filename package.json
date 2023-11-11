@@ -6,6 +6,7 @@
   "dependencies": {
     "ip": "^1.1.5",
     "moment": "^2.29.1",
+    "node": "^21.1.0",
     "node-fetch": "^3.3.2",
     "request": "^2.88.2",
     "yarn": "^1.22.19"

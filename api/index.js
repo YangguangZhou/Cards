@@ -1,6 +1,7 @@
 const moment = require("moment");
 const request = require("request");
 const fs = require("fs");
+const moment = require('moment');
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
@@ -105,21 +106,18 @@ function getWeekday() {
     return ret;
 }
 
-const fetch = require('node-fetch');
-
 async function getCounter() {
     const url = "https://counter.jerryz.com.cn/api/counter";
-    const name = "counter";
-    const data = { name };
-
-    const response = await fetch(url, {
+    const { default: fetch } = await import('node-fetch');
+    const result = await (await fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-    });
-
-    const result = await response.json();
-    return result.times;
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name }),
+    })).json();
+    const counterView = result.times;
+    return counterView;
 }
 
 module.exports = async (req, res) => {
