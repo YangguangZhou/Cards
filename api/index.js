@@ -47,7 +47,7 @@ function trans(text) {
 
 function getBG() {
     var ret = 1;
-    if (getParam("img") && +getParam("img") >= 1 && +getParam("img") <= 3)
+    if (getParam("img") && +getParam("img") >= 1 && +getParam("img") <= 5)
         ret = +getParam("img");
     return ret;
 }
