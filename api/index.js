@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
-const offset = [0, 0, 4.8, 2.7];
+const offset = [0, 0, 4.8, 2.7, 0, 0];
 const icons = [
     "wechat",
     "qq",
@@ -103,7 +103,7 @@ function getDur() {
     var ret = -moment().diff(date, 'days')
     var today = moment(new Date()).format('YYYY-MM-DD')
     if (date == today) return `还有 0 天`;
-    else if (ret >= 0) return `还有 ${ret+1} 天`;
+    else if (ret >= 0) return `还有 ${ret + 1} 天`;
     else return `已经过去 ${-ret} 天`;
 }
 
@@ -142,7 +142,7 @@ module.exports = async (req, res) => {
         background = await readImage(`${prefix}/res/bg/${getBG()}.png`),
         bg_offset = 250 - getBGOffset(),
         socialText = await getSocial(),
-        dayOfYear = moment().dayOfYear()-1,
+        dayOfYear = moment().dayOfYear() - 1,
         year = moment().year(),
         month = moment().format('M'),
         day = moment().format('D'),
