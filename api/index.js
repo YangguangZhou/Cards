@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
-const offset = [0, 0, 4.8, 2.7, -0.75];
+const offset = [0, -0.75, 4.8, 2.7, 0];
 const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
 
 function getParam(str) {
