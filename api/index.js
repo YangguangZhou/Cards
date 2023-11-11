@@ -1,5 +1,6 @@
-import request from 'request';
-import moment from 'moment';
+const moment = require("moment");
+const request = require("request");
+const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
@@ -105,7 +106,7 @@ function getWeekday() {
 }
 
 async function getCounter() {
-    const url = "https://counter.jerryz.com.cn/api/counter";
+    const url = "https://g3rvbpemgm.us.aircode.run/counter";
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter")
     const result = await (await fetch(url, {
