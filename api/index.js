@@ -1,7 +1,6 @@
 const moment = require("moment");
 const request = require("request");
 const fs = require("fs");
-const moment = require('moment');
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
