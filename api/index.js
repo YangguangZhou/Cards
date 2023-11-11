@@ -126,7 +126,7 @@ module.exports = async (req, res) => {
 
     moment.locale("zh-cn");
     param = new URLSearchParams(req.url.split("/api")[1]);
-
+    const counter = await getCounter();
     res.setHeader("Content-Type", "image/svg+xml");
     const {
         background = await readImage(`${prefix}/res/bg/${getBG()}.png`),
@@ -142,7 +142,6 @@ module.exports = async (req, res) => {
         quote_ = getParam("quote") || "永远相信美好的事情即将发生✨",
         fontColor = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
         bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")",
-        counter = await getCounter(),
         welcomeText = counter ? `欢迎您，第${counter}位访问本页面的朋友 🎉` : '欢迎您朋友 🎉'
     } = req.query;
 
@@ -166,7 +165,7 @@ module.exports = async (req, res) => {
     </g>
     
     <g id="detail">
-        <text class="text" transform="translate(20 35)">欢迎您朋友 🎉</text>
+        <text class="text" transform="translate(20 35)">${welcomeText}</text>
         <text class="text" transform="translate(20 65)">今天是 ${month} 月 ${day} 日，${weekday}</text>
         <text class="text" transform="translate(20 95)">也是 ${year} 年的第 ${dayOfYear} 天</text>
         <text class="text" transform="translate(20 125)">距离${toStr}${toDur}</text>
