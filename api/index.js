@@ -1,7 +1,5 @@
 import request from 'request';
 import moment from 'moment';
-const request = require("request");
-const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
