@@ -168,7 +168,7 @@ module.exports = async (req, res) => {
     </g>
     
     <g id="detail">
-        <text class="text" transform="translate(20 35)">${welcomeText}</text>
+        <text class="text" transform="translate(20 35)">欢迎您朋友 🎉</text>
         <text class="text" transform="translate(20 65)">今天是 ${month} 月 ${day} 日，${weekday}</text>
         <text class="text" transform="translate(20 95)">也是 ${year} 年的第 ${dayOfYear} 天</text>
         <text class="text" transform="translate(20 125)">距离${toStr}${toDur}</text>
