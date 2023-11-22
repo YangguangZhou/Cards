@@ -127,6 +127,19 @@ body {
     width: 100%;
 }
 
+#imageLink {
+    text-align: center; /* 居中对齐 */
+    word-wrap: break-word; /* 自动换行 */
+    white-space: normal; /* 允许空白处自动换行 */
+    cursor: pointer; /* 鼠标悬停时显示手形指针 */
+    margin: 20px auto; /* 增加垂直间距以避免重叠，并水平居中 */
+    padding: 10px; /* 内部填充 */
+    border: 1px solid #ebebeb; /* 边框样式 */
+    border-radius: 5px; /* 边框圆角 */
+    max-width: 80%; /* 最大宽度限制 */
+    display: block; /* 使其成为块级元素以便居中 */
+}
+
 .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
 }

@@ -63,6 +63,10 @@ var vm = new Vue({
         social: function (e) {
             for (var i = 0; i < e.length; i++) vm.setParam(icons[i], e[i]);
         },
+
+        image: function(newVal, oldVal) {
+            this.updateImageLink();
+        },
     },
     methods: {
         setParam: function (key, value) {
@@ -77,6 +81,27 @@ var vm = new Vue({
 
         open: function () {
             window.open(vm.image, "_blank");
-        }
+        },
+        updateImageLink: function() {
+            var linkElement = document.getElementById('imageLink');
+            if (linkElement) {
+                linkElement.textContent = this.image; // 'this.image' 应该是图片的 URL
+            }
+        },
+        // 点击复制链接到剪贴板
+        copyToClipboard: function() {
+            var linkElement = document.getElementById('imageLink');
+            if (linkElement) {
+                navigator.clipboard.writeText(linkElement.textContent).then(function() {
+                    // 可以在这里显示一个提示，表示链接已复制
+                    alert('链接已复制到剪贴板');
+                }, function(err) {
+                    console.error('无法复制链接: ', err);
+                });
+            }
+        },
     },
+    mounted: function() {
+        this.updateImageLink();
+    }
 });
