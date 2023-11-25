@@ -1,8 +1,6 @@
 const baseURL = "https://cards.jerryz.com.cn/api";
 const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
-if (window.matchMedia("(max-width: 768px)").matches) {
-    window.location.href = "/m";
-}
+
 function toggleBorder() {
     !window.TOG &&
         document.body.appendChild(
