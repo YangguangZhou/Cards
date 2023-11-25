@@ -1,6 +1,8 @@
 const baseURL = "https://cards.jerryz.com.cn/api";
 const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
-
+if (window.matchMedia("(max-width: 768px)").matches) {
+    window.location.href = "/m";
+}
 function toggleBorder() {
     !window.TOG &&
         document.body.appendChild(
@@ -64,7 +66,7 @@ var vm = new Vue({
             for (var i = 0; i < e.length; i++) vm.setParam(icons[i], e[i]);
         },
 
-        image: function(newVal, oldVal) {
+        image: function (newVal, oldVal) {
             this.updateImageLink();
         },
     },
@@ -80,28 +82,51 @@ var vm = new Vue({
         },
 
         open: function () {
+            umami.track('generate', { image: this.image });
             window.open(vm.image, "_blank");
         },
-        updateImageLink: function() {
-            var linkElement = document.getElementById('imageLink');
+        updateImageLink: function () {
+            var linkElement = document.getElementById('link');
             if (linkElement) {
-                linkElement.textContent = this.image; // 'this.image' 应该是图片的 URL
+                linkElement.textContent = this.image;
             }
         },
-        // 点击复制链接到剪贴板
-        copyToClipboard: function() {
-            var linkElement = document.getElementById('imageLink');
+        fadeIn: function (element) {
+            element.classList.add('fade-in');
+            setTimeout(function () {
+                element.classList.remove('fade-in');
+            }, 300);
+        },
+        fadeOut: function (element) {
+            element.classList.add('fade-out');
+            setTimeout(function () {
+                element.classList.remove('fade-out');
+            }, 300);
+        },
+        copyToClipboard: function () {
+            var linkElement = document.getElementById('link');
             if (linkElement) {
-                navigator.clipboard.writeText(linkElement.textContent).then(function() {
-                    // 可以在这里显示一个提示，表示链接已复制
-                    alert('链接已复制到剪贴板');
-                }, function(err) {
+                navigator.clipboard.writeText(linkElement.textContent).then(function () {
+                    this.fadeOut(linkElement);
+                    setTimeout(function () {
+                        linkElement.textContent = '链接已复制到剪贴板';
+                        this.fadeIn(linkElement);
+                        setTimeout(function () {
+                            this.fadeOut(linkElement);
+                            setTimeout(function () {
+                                linkElement.textContent = this.image;
+                                this.fadeIn(linkElement);
+                            }.bind(this), 300);
+                        }.bind(this), 300);
+                    }.bind(this), 300);
+                }.bind(this), function (err) {
                     console.error('无法复制链接: ', err);
                 });
+                umami.track('generate', { image: this.image });
             }
         },
     },
-    mounted: function() {
+    mounted: function () {
         this.updateImageLink();
     }
 });

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Cards Editor | Jerry Zhou</title>
+    <link rel="stylesheet" href="style.css">
     <link type="favicon" rel="shortcut icon" href="https://jerryz.com.cn/favicon.png" />
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2597042766299857"
         crossorigin="anonymous"></script>
@@ -14,7 +15,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.11.1/lib/theme-chalk/index.css">
     <link href="https://fonts.loli.net/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -25,9 +25,11 @@
             <div class="placeholder" slot="placeholder">加载中...</div>
         </el-image>
 
-        <pre id="imageLink" @click="copyToClipboard">点击复制链接</pre>
+        <div id="imageLink" @click="copyToClipboard">
+            <span id="link">点击复制图片链接</span>
+        </div>
 
-        <el-row :gutter="20">
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">背景图片</el-col>
             <el-col :span="17">
                 <el-radio-group v-model="background" fill='#279cff'>
@@ -35,53 +37,49 @@
                     <el-radio-button label="#2"></el-radio-button>
                     <el-radio-button label="#3"></el-radio-button>
                     <el-radio-button label="#4"></el-radio-button>
+                    <el-radio-button label="#5"></el-radio-button>
                 </el-radio-group>
             </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">文字颜色</el-col>
-            <el-col :span="7">
-                <el-color-picker v-model="text_color" show-alpha></el-color-picker>
-            </el-col>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">背景颜色</el-col>
             <el-col :span="7">
                 <el-color-picker v-model="bg_color" show-alpha></el-color-picker>
             </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
+        </div>
+        <div class="form-group">
+            <el-col :span="3" class="text" :xs="7">文字颜色</el-col>
+            <el-col :span="7">
+                <el-color-picker v-model="text_color" show-alpha></el-color-picker>
+            </el-col>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">目标日期</el-col>
-            <el-col :span="7">
-                <el-date-picker v-model="date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
-                    value-format="yyyy-MM-dd"></el-date-picker>
-            </el-col>
+            <el-date-picker v-model="date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
+                value-format="yyyy-MM-dd" class="input"></el-date-picker>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">日期文本</el-col>
-            <el-col :span="7">
-                <el-input v-model="str" :placeholder="str_placeholder"></el-input>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
+            <el-input v-model="str" :placeholder="str_placeholder" class="input"></el-input>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">底部文本</el-col>
-            <el-col :span="7">
-                <el-input v-model="quote" placeholder="永远相信美好的事情即将发生✨"></el-input>
-            </el-col>
+            <el-input v-model="quote" placeholder="永远相信美好的事情即将发生✨" class="input"></el-input>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">访问量统计</el-col>
-            <el-col :span="7">
-                <el-input v-model="counter" placeholder="Cards"></el-input>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
+            <el-input v-model="counter" placeholder="Cards" class="input"></el-input>
+        </div>
+        <div class="form-group">
             <el-col :span="3" class="text" :xs="7">社交账号</el-col>
-            <el-col :span="17">
+            <div class="input">
                 <div class="social" v-for="(o, index) in icons">
-                    <el-image :src="'https://cards.jerryz.com.cn/res/icon/' + o + '.svg'"></el-image>
+                    <el-image class="socialimg" :src="'https://cards.jerryz.com.cn/res/icon/' + o + '.svg'"
+                        style="overflow: unset;"></el-image>
                     <el-input v-model="social[index]" :placeholder="o"></el-input>
                 </div>
-            </el-col>
-        </el-row>
+            </div>
+        </div>
 
         <div class="help">
             温馨提示：预览图是可以点击的，点击链接就可以复制内容
