@@ -120,7 +120,7 @@ var vm = new Vue({
                 }.bind(this), function (err) {
                     console.error('无法复制链接: ', err);
                 });
-                umami.track('generate', { image: this.image });
+                umami.track('generate', this.image);
             }
         },
     },
