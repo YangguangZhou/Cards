@@ -4,7 +4,7 @@ const fs = require("fs");
 
 var param;
 const prefix = "http://cards.jerryz.com.cn";
-const offset = [0, -0.75, 0, 4.8, 2.7, 0];
+const offset = [0, -0.75, 1.75, 4.8, 2.7, 0];
 const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
 
 function getParam(str) {
@@ -160,8 +160,8 @@ module.exports = async (req, res) => {
     </defs>
     <title>Cards | Jerry Zhou</title>
     <g id="image">
-        <image class="bg" transform="translate(${bg_offset} 32) scale(0.5)" href="${background}"/>
         <line class="line" x1="250.5" y1="20" x2="250.5" y2="170"/>
+        <image class="bg" transform="translate(${bg_offset} 32) scale(0.5)" href="${background}"/>
     </g>
     
     <g id="detail">
