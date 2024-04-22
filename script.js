@@ -23,7 +23,7 @@ var vm = new Vue({
         date: new Date().getFullYear() + "-12-31",
         str: "",
         str_placeholder: new Date().getFullYear() + " 年末",
-        quote: ""
+        quote: "",
         social: [],
     },
     watch: {
