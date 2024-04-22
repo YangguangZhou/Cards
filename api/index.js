@@ -105,28 +105,12 @@ function getWeekday() {
     return ret;
 }
 
-async function getCounter() {
-    const url = "https://g3rvbpemgm.us.aircode.run/counter";
-    const { default: fetch } = await import('node-fetch');
-    const name = getParam("counter")
-    const result = await (await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name }),
-    })).json();
-    const counterView = result.times;
-    return counterView;
-}
-
 module.exports = async (req, res) => {
     if (!req.url.includes("Jerry Zhou"))
         console.log("[Running] " + decodeURI(req.url));
 
     moment.locale("zh-cn");
     param = new URLSearchParams(req.url.split("/api")[1]);
-    const counter = await getCounter();
     res.setHeader("Content-Type", "image/svg+xml");
     const {
         background = await readImage(`${prefix}/res/bg/${getBG()}.png`),
@@ -142,7 +126,7 @@ module.exports = async (req, res) => {
         quote_ = getParam("quote") || "永远相信美好的事情即将发生✨",
         fontColor = "rgba(" + (getParam("color") || "0,0,0,1") + ")",
         bgColor = "rgba(" + (getParam("bg") || "0,0,0,0") + ")",
-        welcomeText = counter ? `欢迎您，第 ${counter} 位访问本页面的朋友 🎉` : '欢迎您朋友 🎉'
+        welcomeText = '欢迎您朋友 🎉'
     } = req.query;
 
     res.send(`
