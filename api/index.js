@@ -1,3 +1,5 @@
+// Original code by Xecades
+// Modified code © 2021 - 2024 YangguangZhou (GitHub: YangguangZhou)
 const moment = require("moment");
 const request = require("request");
 const fs = require("fs");

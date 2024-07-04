@@ -1,3 +1,5 @@
+// Original code by Xecades
+// Modified code © 2021 - 2024 YangguangZhou (GitHub: YangguangZhou)
 const baseURL = "https://cards.jerryz.com.cn/api";
 const icons = ["wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", "csdn", "douban", "taobao"];
 
