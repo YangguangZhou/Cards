@@ -13,6 +13,18 @@ function toggleBorder() {
         : (TOG.innerHTML = "");
 }
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 var vm = new Vue({
     el: "#app",
     data: {
@@ -28,15 +40,10 @@ var vm = new Vue({
         quote: "",
         counter: "",
         social: [],
-        debounceTimer: null,
     },
     watch: {
         background: function (e) {
             this.debouncedSetParam("img", e.slice(1));
-        },
-
-        params: function (e) {
-            this.debouncedUpdateImage();
         },
 
         text_color: function (e) {
@@ -72,9 +79,14 @@ var vm = new Vue({
         social: function (e) {
             for (var i = 0; i < e.length; i++) this.debouncedSetParam(icons[i], e[i]);
         },
+
+        params: debounce(function (newParams) {
+            this.image = baseURL + (newParams ? "?" + newParams : "");
+            this.updateImageLink();
+        }, 500),
     },
     methods: {
-        setParam: function (key, value) {
+        debouncedSetParam: debounce(function (key, value) {
             var tmp = new URLSearchParams(this.params);
             if (!value) tmp.delete(key);
             else tmp.set(key, value
@@ -82,49 +94,30 @@ var vm = new Vue({
                 .replace(/\</gm, "{%lt%}")
                 .replace(/\>/gm, "{%gt%}"));
             this.params = tmp.toString();
-        },
-
-        debouncedSetParam: function(key, value) {
-            clearTimeout(this.debounceTimer);
-            this.debounceTimer = setTimeout(() => {
-                this.setParam(key, value);
-            }, 1500);
-        },
-
-        debouncedUpdateImage: function() {
-            clearTimeout(this.debounceTimer);
-            this.debounceTimer = setTimeout(() => {
-                this.image = baseURL + (this.params ? "?" + this.params : "");
-                this.updateImageLink();
-            }, 1500);
-        },
+        }, 1500),
 
         open: function () {
             umami.track('generate', { open: this.image });
             window.open(this.image, "_blank");
         },
-
         updateImageLink: function () {
             var linkElement = document.getElementById('link');
             if (linkElement) {
                 linkElement.textContent = this.image;
             }
         },
-
         fadeIn: function (element) {
             element.classList.add('fade-in');
             setTimeout(function () {
                 element.classList.remove('fade-in');
             }, 300);
         },
-
         fadeOut: function (element) {
             element.classList.add('fade-out');
             setTimeout(function () {
                 element.classList.remove('fade-out');
             }, 300);
         },
-
         copyToClipboard: function () {
             var linkElement = document.getElementById('link');
             if (linkElement) {
