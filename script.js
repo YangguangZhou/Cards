@@ -28,81 +28,103 @@ var vm = new Vue({
         quote: "",
         counter: "",
         social: [],
+        debounceTimer: null,
     },
     watch: {
         background: function (e) {
-            vm.setParam("img", e.slice(1));
+            this.debouncedSetParam("img", e.slice(1));
         },
 
         params: function (e) {
-            vm.image = baseURL + (e ? "?" + e : "");
+            this.debouncedUpdateImage();
         },
 
         text_color: function (e) {
-            vm.setParam("color", e.slice(5, e.length - 1).replaceAll(" ", ""));
+            this.debouncedSetParam("color", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
         bg_color: function (e) {
-            vm.setParam("bg", e.slice(5, e.length - 1).replaceAll(" ", ""));
+            this.debouncedSetParam("bg", e.slice(5, e.length - 1).replaceAll(" ", ""));
         },
 
         date: function (e) {
-            vm.setParam("date", e);
+            this.debouncedSetParam("date", e);
         },
 
         str: function (e) {
-            vm.setParam("str", e);
+            this.debouncedSetParam("str", e);
         },
 
         quote: function (e) {
-            vm.setParam("quote", e);
+            this.debouncedSetParam("quote", e);
         },
 
         counter: function (e) {
-            vm.setParam("counter", e);
+            const regex = /^[a-zA-Z0-9_\-\.!@#$%^&*()+=\[\]{}|;:,<>?]+$/;
+            if (regex.test(e) || e === "") {
+                this.debouncedSetParam("counter", e);
+            } else {
+                alert("输入不合法！合法字符包括：英文字母、数字、下划线、连字符、点号以及常见的特殊字符（如 !@#$%^&*()+=[]{}|;:,<>?）");
+                this.counter = ""; // 清空输入
+            }
         },
 
         social: function (e) {
-            for (var i = 0; i < e.length; i++) vm.setParam(icons[i], e[i]);
-        },
-
-        image: function (newVal, oldVal) {
-            this.updateImageLink();
+            for (var i = 0; i < e.length; i++) this.debouncedSetParam(icons[i], e[i]);
         },
     },
     methods: {
         setParam: function (key, value) {
-            var tmp = new URLSearchParams(vm.params);
+            var tmp = new URLSearchParams(this.params);
             if (!value) tmp.delete(key);
             else tmp.set(key, value
                 .replace(/\&/gm, "{%amp%}")
                 .replace(/\</gm, "{%lt%}")
                 .replace(/\>/gm, "{%gt%}"));
-            vm.params = tmp.toString();
+            this.params = tmp.toString();
+        },
+
+        debouncedSetParam: function(key, value) {
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                this.setParam(key, value);
+            }, 1500);
+        },
+
+        debouncedUpdateImage: function() {
+            clearTimeout(this.debounceTimer);
+            this.debounceTimer = setTimeout(() => {
+                this.image = baseURL + (this.params ? "?" + this.params : "");
+                this.updateImageLink();
+            }, 1500);
         },
 
         open: function () {
             umami.track('generate', { open: this.image });
-            window.open(vm.image, "_blank");
+            window.open(this.image, "_blank");
         },
+
         updateImageLink: function () {
             var linkElement = document.getElementById('link');
             if (linkElement) {
                 linkElement.textContent = this.image;
             }
         },
+
         fadeIn: function (element) {
             element.classList.add('fade-in');
             setTimeout(function () {
                 element.classList.remove('fade-in');
             }, 300);
         },
+
         fadeOut: function (element) {
             element.classList.add('fade-out');
             setTimeout(function () {
                 element.classList.remove('fade-out');
             }, 300);
         },
+
         copyToClipboard: function () {
             var linkElement = document.getElementById('link');
             if (linkElement) {
