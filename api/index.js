@@ -108,7 +108,7 @@ function getWeekday() {
 }
 
 async function getCounter() {
-    const url = "https://g3rvbpemgm.us.aircode.run/counter";
+    const url = "https://counter-sever.jerryz.com.cn/counter";
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter")
     const result = await (await fetch(url, {
