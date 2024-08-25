@@ -88,7 +88,7 @@ var vm = new Vue({
             clearTimeout(this.debounceTimer);
             this.debounceTimer = setTimeout(() => {
                 this.setParam(key, value);
-            }, 1500);
+            }, 300);
         },
 
         debouncedUpdateImage: function() {
@@ -96,7 +96,7 @@ var vm = new Vue({
             this.debounceTimer = setTimeout(() => {
                 this.image = baseURL + (this.params ? "?" + this.params : "");
                 this.updateImageLink();
-            }, 1500);
+            }, 300);
         },
 
         open: function () {
