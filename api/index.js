@@ -111,7 +111,9 @@ async function getCounter(req) {
     const url = "https://counter-sever.jerryz.com.cn/counter";
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter");
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const headers = req && req.headers ? req.headers : {};
+    const ip = headers['x-forwarded-for'] || (req && req.socket ? req.socket.remoteAddress : 'unknown');
+
     const result = await (await fetch(url, {
         method: 'POST',
         headers: {
@@ -119,6 +121,7 @@ async function getCounter(req) {
         },
         body: JSON.stringify({ name, ip }),
     })).json();
+
     const counterView = result.times;
     return counterView;
 }
