@@ -112,7 +112,7 @@ async function getCounter(req) {
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter");
     const headers = req && req.headers ? req.headers : {};
-    const ip = headers['x-forwarded-for'] || (req && req.socket ? req.socket.remoteAddress : 'unknown');
+   const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     const result = await (await fetch(url, {
         method: 'POST',
