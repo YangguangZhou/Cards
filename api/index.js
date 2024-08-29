@@ -107,16 +107,17 @@ function getWeekday() {
     return ret;
 }
 
-async function getCounter() {
+async function getCounter(req) {
     const url = "https://counter-sever.jerryz.com.cn/counter";
     const { default: fetch } = await import('node-fetch');
-    const name = getParam("counter")
+    const name = getParam("counter");
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     const result = await (await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, ip }),
     })).json();
     const counterView = result.times;
     return counterView;
