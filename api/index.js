@@ -111,8 +111,11 @@ async function getCounter(req) {
     const url = "https://counter-sever.jerryz.com.cn/counter";
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter");
-    //const headers = req && req.headers ? req.headers : {};
-   //const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.connection.remoteAddress;
+
+    // 如果 counter 参数不存在，直接返回默认消息
+    if (!name) {
+        return 0; // 返回 0 表示没有访问计数
+    }
 
     const result = await (await fetch(url, {
         method: 'POST',
@@ -125,6 +128,7 @@ async function getCounter(req) {
     const counterView = result.times;
     return counterView;
 }
+
 
 module.exports = async (req, res) => {
     if (!req.url.includes("Jerry Zhou"))
