@@ -1,113 +1,842 @@
-<!-- Original code by Xecades -->
-<!-- Modified code © 2021 - 2024 YangguangZhou (GitHub: YangguangZhou) -->
 <!DOCTYPE html>
 <html lang="zh-cn">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards Editor | Jerry Zhou</title>
     <link type="favicon" rel="shortcut icon" href="https://jerryz.com.cn/favicon.png" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2597042766299857"
-        crossorigin="anonymous"></script>
+    <!-- Modern frameworks: Vue 3 + Element Plus + Tailwind CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/index.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/index.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/locale/zh-cn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Add analytics scripts -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2597042766299857" crossorigin="anonymous"></script>
     <script async src="https://umami.jerryz.com.cn/script.js" data-website-id="1006ea39-2df4-43f1-9c17-fac76c4e4f1e"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.11.1/lib/theme-chalk/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <meta name="description" content="个人电子名片编辑器，支持添加社交账号、访问统计、倒数日等多种功能">
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #3B82F6;
+            --primary-light: #93C5FD;
+            --primary-dark: #1D4ED8;
+            --accent-color: #EC4899;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --bg-primary: #F9FAFB;
+            --bg-secondary: #FFFFFF;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --transition: all 0.3s ease;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 0.8rem;
+            --spacing-lg: 1.2rem;
+            --spacing-xl: 1.8rem;
+            --spacing-2xl: 2.5rem;
+            --el-component-size: 36px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            font-family: 'Nunito', 'Noto Serif SC', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--primary-light);
+            border-radius: var(--radius-sm);
+        }
+        
+        ::-webkit-scrollbar-track {
+            background-color: var(--bg-primary);
+        }
+        
+        /* App Container */
+        #app {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+        
+        /* Cards & Sections */
+        .card {
+            background-color: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+        
+        section {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        /* Typography */
+        .title {
+            font-family: 'Nunito', 'Noto Serif SC', sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--primary-dark);
+            font-weight: 700;
+            letter-spacing: 0.01em;
+        }
+        
+        .description {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-lg);
+            line-height: 1.5;
+        }
+        
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .section-title::before {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: var(--radius-sm);
+        }
+        
+        /* Preview Image */
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-container {
+            width: 100%;
+            max-width: 600px;
+            margin: var(--spacing-md) 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            line-height: 0; /* Fix white space issue */
+        }
+        
+        .preview-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: var(--transition);
+            cursor: pointer;
+            border-radius: var(--radius-lg);
+            display: block; /* Fix white space issue */
+        }
+        
+        .preview-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Image Link */
+        .image-link-container {
+            width: 100%;
+            max-width: 600px;
+            margin: var(--spacing-md) auto;
+        }
+        
+        .image-link {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            word-break: break-all;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: block;
+            width: 100%;
+        }
+        
+        .image-link:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Link Parser */
+        .parser-section {
+            margin: var(--spacing-xl) 0;
+        }
+        
+        .link-parser {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .parser-buttons {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        /* Form Elements */
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .form-group {
+            margin-bottom: 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        
+        /* Social Icons Grid */
+        .social-section {
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-sm);
+        }
+        
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: 0.25rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+        
+        .social-item:hover {
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: var(--spacing-2xl);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .help-text, .counter, .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .copyright a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .copyright a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Animations - Reduced amplitude */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(3px); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.2s ease forwards;
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.2s ease forwards;
+        }
+        
+        /* Customize Element Plus */
+        .el-button {
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .el-button--primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .el-button--primary:hover, .el-button--primary:focus {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .el-input__inner, .el-input__wrapper {
+            border-radius: var(--radius-md) !important;
+        }
+        
+        .el-radio-button__inner {
+            border-radius: 0;
+        }
+        
+        .el-radio-group .el-radio-button:first-child .el-radio-button__inner {
+            border-top-left-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-md);
+        }
+        
+        .el-radio-group .el-radio-button:last-child .el-radio-button__inner {
+            border-top-right-radius: var(--radius-md);
+            border-bottom-right-radius: var(--radius-md);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-lg: 1rem;
+                --spacing-xl: 1.5rem;
+                --spacing-2xl: 2rem;
+            }
+            
+            #app {
+                padding: var(--spacing-md);
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .link-parser {
+                flex-direction: column;
+            }
+            
+            .parser-buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .social-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: var(--spacing-md);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <div class="title">Cards编辑器</div>
+        <h1 class="title">Cards编辑器</h1>
+        <p class="description">
+            Cards是一个简单易用的个人名片生成工具，可以帮助你创建精美的个人名片，支持自定义背景、文本、社交媒体等，适合分享到各个社交平台。
+        </p>
 
-        <el-image class="image" :src="image" @click="open">
-            <div class="placeholder" slot="placeholder">加载中...</div>
-        </el-image>
+        <section class="image-section">
+            <div class="image-container">
+                <el-image class="preview-image" :src="image" @click="openImage" fit="cover">
+                    <template #placeholder>
+                        <div style="display: flex; justify-content: center; align-items: center; height: 300px; background-color: #f5f7fa;">
+                            <el-icon style="font-size: 30px;"><i class="el-icon-loading"></i></el-icon>
+                        </div>
+                    </template>
+                </el-image>
+            </div>
 
-        <div id="imageLink" @click="copyToClipboard">
-            <span id="link">点击复制图片链接</span>
-        </div>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">背景图片</el-col>
-            <el-col :span="17">
-                <el-radio-group v-model="background" fill='#279cff'>
-                    <el-radio-button label="#1"></el-radio-button>
-                    <el-radio-button label="#2"></el-radio-button>
-                    <el-radio-button label="#3"></el-radio-button>
-                    <el-radio-button label="#4"></el-radio-button>
-                    <el-radio-button label="#5"></el-radio-button>
-                </el-radio-group>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">文字颜色</el-col>
-            <el-col :span="7">
-                <el-color-picker v-model="text_color" show-alpha></el-color-picker>
-            </el-col>
-            <el-col :span="3" class="text" :xs="7">背景颜色</el-col>
-            <el-col :span="7">
-                <el-color-picker v-model="bg_color" show-alpha></el-color-picker>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">目标日期</el-col>
-            <el-col :span="7">
-                <el-date-picker v-model="date" type="date" placeholder="选择日期" format="yyyy 年 MM 月 dd 日"
-                    value-format="yyyy-MM-dd"></el-date-picker>
-            </el-col>
-            <el-col :span="3" class="text" :xs="7">日期文本</el-col>
-            <el-col :span="7">
-                <el-input v-model="str" :placeholder="str_placeholder"></el-input>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">底部文本</el-col>
-            <el-col :span="7">
-                <el-input v-model="quote" placeholder="永远相信美好的事情即将发生✨"></el-input>
-            </el-col>
-            <el-col :span="3" class="text" :xs="7">访问量统计</el-col>
-            <el-col :span="7">
-                <el-input v-model="counter" placeholder="Cards"></el-input>
-            </el-col>
-        </el-row>
-
-        <el-row :gutter="20">
-            <el-col :span="3" class="text" :xs="7">社交账号</el-col>
-            <el-col :span="17">
-                <div class="social" v-for="(o, index) in icons">
-                    <el-image :src="'https://cards.jerryz.com.cn/res/icon/' + o + '.svg'"></el-image>
-                    <el-input v-model="social[index]" :placeholder="o"></el-input>
+            <div class="image-link-container">
+                <div class="image-link" @click="copyToClipboard">
+                    <span :id="'link'" ref="linkText">{{ image }}</span>
                 </div>
-            </el-col>
-        </el-row>
+            </div>
+        </section>
 
-        <div class="help">
-            温馨提示：预览图是可以点击的，点击链接就可以复制内容
-        </div>
+        <section class="parser-section">
+            <h2 class="section-title">链接解析</h2>
+            <div class="card">
+                <div class="link-parser">
+                    <el-input 
+                        v-model="linkToParse" 
+                        placeholder="输入Cards链接进行解析" 
+                        style="flex-grow: 1;">
+                    </el-input>
+                    <div class="parser-buttons">
+                        <el-button type="primary" @click="parseLink">
+                            解析
+                        </el-button>
+                        <el-button type="danger" @click="resetAll">
+                            重置
+                        </el-button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="counter">
-            <span id="busuanzi_value_page_pv"><i class="el-icon-loading"></i></span> Views |
-            <span id="busuanzi_value_site_uv"><i class="el-icon-loading"></i></span> Viewers
-        </div>
+        <section>
+            <h2 class="section-title">基本设置</h2>
+            <div class="card">
+                <div class="form-container">
+                    <div class="form-group">
+                        <label>背景图片</label>
+                        <el-radio-group v-model="background" fill="#3B82F6">
+                            <el-radio-button label="#1"></el-radio-button>
+                            <el-radio-button label="#2"></el-radio-button>
+                            <el-radio-button label="#3"></el-radio-button>
+                            <el-radio-button label="#4"></el-radio-button>
+                            <el-radio-button label="#5"></el-radio-button>
+                        </el-radio-group>
+                    </div>
 
-        <div class="copyright">
-            Copyright &copy; 2021-2024 <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
-            </br>
-            <a href="https://github.com/YangguangZhou/Cards" target="_blank">GitHub</a>
-        </div>
+                    <div class="form-group">
+                        <label>文字颜色</label>
+                        <el-color-picker 
+                            v-model="text_color" 
+                            show-alpha 
+                            :predefine="['rgba(0, 0, 0, 1)', 'rgba(255, 255, 255, 1)', 'rgba(59, 130, 246, 1)', 'rgba(236, 72, 153, 1)']">
+                        </el-color-picker>
+                    </div>
+
+                    <div class="form-group">
+                        <label>背景颜色</label>
+                        <el-color-picker 
+                            v-model="bg_color" 
+                            show-alpha
+                            :predefine="['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, 0.8)', 'rgba(59, 130, 246, 0.2)', 'rgba(236, 72, 153, 0.2)']">
+                        </el-color-picker>
+                    </div>
+
+                    <div class="form-group">
+                        <label>目标日期</label>
+                        <el-date-picker 
+                            v-model="date" 
+                            type="date" 
+                            placeholder="选择日期" 
+                            format="YYYY 年 MM 月 DD 日"
+                            value-format="YYYY-MM-DD"
+                            style="width: 100%">
+                        </el-date-picker>
+                    </div>
+
+                    <div class="form-group">
+                        <label>日期文本</label>
+                        <el-input v-model="str" :placeholder="str_placeholder"></el-input>
+                    </div>
+
+                    <div class="form-group">
+                        <label>底部文本</label>
+                        <el-input v-model="quote" placeholder="永远相信美好的事情即将发生✨"></el-input>
+                    </div>
+
+                    <div class="form-group">
+                        <label>访问量统计</label>
+                        <el-input v-model="counter" placeholder="Cards"></el-input>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <h2 class="section-title">社交账号</h2>
+            <div class="card">
+                <div class="social-container">
+                    <div class="social-item" v-for="(icon, index) in icons" :key="icon">
+                        <el-image class="social-icon" :src="'https://cards.jerryz.com.cn/res/icon/' + icon + '.svg'"></el-image>
+                        <el-input v-model="social[index]" :placeholder="icon" @input="handleSocialInput"></el-input>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="help-text">
+                温馨提示：点击预览图可查看大图，点击链接可复制内容，也可以直接输入链接进行解析
+            </div>
+
+            <div class="counter">
+                <span id="busuanzi_value_page_pv"><i class="el-icon-loading"></i></span> 次访问 | 
+                <span id="busuanzi_value_site_uv"><i class="el-icon-loading"></i></span> 位访客
+            </div>
+
+            <div class="copyright">
+                Copyright &copy; 2021-2024 <a href="https://jerryz.com.cn" target="_blank" rel="noopener noreferrer">Jerry Zhou</a>
+                <br>
+                <a href="https://github.com/YangguangZhou/Cards" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.11.1/lib/index.js"></script>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <script src="script.js"></script>
-    <script src="mobile.js"></script>
+
+    <script>
+        const baseURL = "https://cards.jerryz.com.cn/api";
+        const { createApp, ref, computed, watch, onMounted } = Vue;
+        const app = createApp({
+            setup() {
+                const icons = [
+                    "wechat", "qq", "site", "phone", "email", "github", "gitee", "coolapk", 
+                    "bilibili", "zhihu", "weibo", "tiktok", "twitter", "telegram", "facebook", 
+                    "instagram", "google", "microsoft", "luogu", "codeforces", "alipay", 
+                    "csdn", "douban", "taobao", "linuxdo", "discord", "reddit", "youtube", 
+                    "whatsapp", "linkedin", "snapchat", "duolingo", "steam"
+                ];
+                
+                // Data
+                const image = ref(baseURL);
+                const params = ref("");
+                const background = ref("#1");
+                const text_color = ref("rgba(0, 0, 0, 1)");
+                const bg_color = ref("rgba(0, 0, 0, 0)");
+                const date = ref(new Date().getFullYear() + "-12-31");
+                const str = ref("");
+                const quote = ref("");
+                const counter = ref("");
+                const social = ref(Array(icons.length).fill(""));
+                const debounceTimer = ref(null);
+                const linkToParse = ref("");
+                const linkText = ref(null);
+
+                // Computed
+                const str_placeholder = computed(() => new Date().getFullYear() + " 年末");
+
+                // Methods
+                const setParam = (key, value) => {
+                    const tmp = new URLSearchParams(params.value);
+                    if (!value) tmp.delete(key);
+                    else tmp.set(key, value
+                        .replace(/\&/gm, "{%amp%}")
+                        .replace(/\</gm, "{%lt%}")
+                        .replace(/\>/gm, "{%gt%}"));
+                    params.value = tmp.toString();
+                };
+
+                const debouncedSetParam = (key, value) => {
+                    clearTimeout(debounceTimer.value);
+                    debounceTimer.value = setTimeout(() => {
+                        setParam(key, value);
+                    }, 200); // Reduced debounce time
+                };
+
+                const updateImage = () => {
+                    image.value = baseURL + (params.value ? "?" + params.value : "");
+                };
+
+                const debouncedUpdateImage = () => {
+                    clearTimeout(debounceTimer.value);
+                    debounceTimer.value = setTimeout(() => {
+                        updateImage();
+                    }, 200); // Reduced debounce time
+                };
+
+                // Added handler for social input to ensure immediate update
+                const handleSocialInput = () => {
+                    // Update immediately instead of waiting for watch
+                    for (let i = 0; i < social.value.length; i++) {
+                        setParam(icons[i], social.value[i]);
+                    }
+                    updateImage(); // Update image immediately
+                };
+
+                const openImage = () => {
+                    window.open(image.value, "_blank");
+                    // Track analytics if umami exists
+                    if (typeof umami !== 'undefined') {
+                        umami.track('generate', { open: image.value });
+                    }
+                };
+
+                const fadeIn = (element) => {
+                    element.classList.add('fade-in');
+                    setTimeout(() => {
+                        element.classList.remove('fade-in');
+                    }, 200); // Reduced animation time
+                };
+
+                const fadeOut = (element) => {
+                    element.classList.add('fade-out');
+                    setTimeout(() => {
+                        element.classList.remove('fade-out');
+                    }, 200); // Reduced animation time
+                };
+
+                const copyToClipboard = () => {
+                    if (linkText.value) {
+                        navigator.clipboard.writeText(image.value).then(() => {
+                            const elementToCopy = linkText.value;
+                            fadeOut(elementToCopy);
+                            setTimeout(() => {
+                                elementToCopy.innerText = '链接已复制到剪贴板';
+                                fadeIn(elementToCopy);
+                                setTimeout(() => {
+                                    fadeOut(elementToCopy);
+                                    setTimeout(() => {
+                                        elementToCopy.innerText = image.value;
+                                        fadeIn(elementToCopy);
+                                    }, 200);
+                                }, 1000);
+                            }, 200);
+                        }).catch(err => {
+                            console.error('无法复制链接: ', err);
+                            ElementPlus.ElMessage.error('复制失败，请手动复制');
+                        });
+                        
+                        // Track analytics if umami exists
+                        if (typeof umami !== 'undefined') {
+                            umami.track('generate', { copy: image.value });
+                        }
+                    }
+                };
+
+                // Link parser functionality
+                const parseLink = () => {
+                    if (!linkToParse.value) {
+                        ElementPlus.ElMessage.warning('请输入要解析的链接');
+                        return;
+                    }
+                    
+                    try {
+                        // Extract the query string
+                        const url = new URL(linkToParse.value);
+                        const urlParams = new URLSearchParams(url.search);
+                        
+                        // Update all fields
+                        if (urlParams.has('img')) {
+                            background.value = "#" + urlParams.get('img');
+                        }
+                        
+                        if (urlParams.has('color')) {
+                            const color = urlParams.get('color').split(',');
+                            if (color.length === 3) {
+                                text_color.value = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 1)`;
+                            } else if (color.length === 4) {
+                                text_color.value = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`;
+                            }
+                        }
+                        
+                        if (urlParams.has('bg')) {
+                            const bg = urlParams.get('bg').split(',');
+                            if (bg.length === 3) {
+                                bg_color.value = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, 1)`;
+                            } else if (bg.length === 4) {
+                                bg_color.value = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${bg[3]})`;
+                            }
+                        }
+                        
+                        if (urlParams.has('date')) {
+                            date.value = urlParams.get('date');
+                        }
+                        
+                        if (urlParams.has('str')) {
+                            str.value = decodeURLParam(urlParams.get('str'));
+                        }
+                        
+                        if (urlParams.has('quote')) {
+                            quote.value = decodeURLParam(urlParams.get('quote'));
+                        }
+                        
+                        if (urlParams.has('counter')) {
+                            counter.value = decodeURLParam(urlParams.get('counter'));
+                        }
+                        
+                        // Parse social icons
+                        const newSocial = [...social.value];
+                        icons.forEach((icon, index) => {
+                            if (urlParams.has(icon)) {
+                                newSocial[index] = decodeURLParam(urlParams.get(icon));
+                            } else {
+                                newSocial[index] = '';
+                            }
+                        });
+                        social.value = newSocial;
+                        
+                        // Force image refresh immediately after parsing
+                        updateImage();
+                        
+                        ElementPlus.ElMessage.success('链接解析成功');
+                    } catch (error) {
+                        console.error('解析链接出错:', error);
+                        ElementPlus.ElMessage.error('链接解析失败，请检查链接格式');
+                    }
+                };
+                
+                // Helper function to decode URL parameters
+                const decodeURLParam = (value) => {
+                    if (!value) return '';
+                    return value
+                        .replace(/\{%amp%\}/g, '&')
+                        .replace(/\{%lt%\}/g, '<')
+                        .replace(/\{%gt%\}/g, '>');
+                };
+                
+                // Reset all fields
+                const resetAll = () => {
+                    background.value = "#1";
+                    text_color.value = "rgba(0, 0, 0, 1)";
+                    bg_color.value = "rgba(0, 0, 0, 0)";
+                    date.value = new Date().getFullYear() + "-12-31";
+                    str.value = "";
+                    quote.value = "";
+                    counter.value = "";
+                    social.value = Array(icons.length).fill("");
+                    linkToParse.value = "";
+                    
+                    // Force image refresh immediately after reset
+                    updateImage();
+                    
+                    ElementPlus.ElMessage.success('所有设置已重置');
+                };
+                
+                // Watch
+                watch(background, (newVal) => {
+                    debouncedSetParam("img", newVal.slice(1));
+                });
+                
+                watch(params, () => {
+                    debouncedUpdateImage();
+                });
+                
+                watch(text_color, (newVal) => {
+                    // Extract rgba values
+                    const match = newVal.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+                    if (match) {
+                        const [, r, g, b, a = 1] = match;
+                        debouncedSetParam("color", `${r},${g},${b},${a}`);
+                    }
+                });
+                
+                watch(bg_color, (newVal) => {
+                    // Extract rgba values
+                    const match = newVal.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+                    if (match) {
+                        const [, r, g, b, a = 1] = match;
+                        debouncedSetParam("bg", `${r},${g},${b},${a}`);
+                    }
+                });
+                
+                watch(date, (newVal) => {
+                    debouncedSetParam("date", newVal);
+                });
+                
+                watch(str, (newVal) => {
+                    debouncedSetParam("str", newVal);
+                });
+                
+                watch(quote, (newVal) => {
+                    debouncedSetParam("quote", newVal);
+                });
+                
+                watch(counter, (newVal) => {
+                    const regex = /^[a-zA-Z0-9_\-\.!@#$%^&*()+=\[\]{}|;:,<>?]*$/;
+                    if (regex.test(newVal) || newVal === "") {
+                        debouncedSetParam("counter", newVal);
+                    } else {
+                        ElementPlus.ElMessage.error('输入不合法！合法字符包括：英文字母、数字、下划线、连字符、点号以及常见的特殊字符');
+                        counter.value = '';
+                    }
+                });
+                
+                // Watch is still needed for programmatic changes, but handleSocialInput provides immediate updates
+                watch(social, (newVal) => {
+                    for (let i = 0; i < newVal.length; i++) {
+                        debouncedSetParam(icons[i], newVal[i]);
+                    }
+                }, { deep: true });
+                
+                onMounted(() => {
+                    updateImage();
+                });
+                
+                return {
+                    icons,
+                    image,
+                    background,
+                    text_color,
+                    bg_color,
+                    date,
+                    str,
+                    str_placeholder,
+                    quote,
+                    counter,
+                    social,
+                    linkToParse,
+                    linkText,
+                    openImage,
+                    copyToClipboard,
+                    parseLink,
+                    resetAll,
+                    handleSocialInput
+                };
+            }
+        });
+        
+        // Use Element Plus with Chinese locale
+        app.use(ElementPlus, {
+            locale: ElementPlus.zhCn
+        });
+        
+        // Mount the app
+        app.mount('#app');
+    </script>
 </body>
 
 </html>

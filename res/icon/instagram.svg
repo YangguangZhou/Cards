@@ -1,1 +1,54 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1677852926497" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9260" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200"><path d="M544.06 959.267h-64.95c-228.633 0-415.697-187.064-415.697-415.698V478.62c0-228.633 187.064-415.697 415.698-415.697h64.949c228.633 0 415.697 187.064 415.697 415.697v64.95c0 228.633-187.065 415.697-415.697 415.697z" fill="#E80D72" p-id="9261"></path><path d="M509.716 393.06c-65.755 0-119.06 53.304-119.06 119.059s53.305 119.06 119.06 119.06 119.06-53.305 119.06-119.06-53.305-119.06-119.06-119.06z m0 196.533c-42.787 0-77.475-34.686-77.475-77.474s34.687-77.475 77.475-77.475 77.474 34.687 77.474 77.475-34.686 77.474-77.474 77.474z m230.78-178.49c0-72.574-57.19-129.763-129.763-129.763 0 0-51.33-1.642-101.016-1.642s-99.374 1.642-99.374 1.642c-72.573 0-131.406 58.833-131.406 131.406 0 0-1.642 46.455-1.642 94.447 0 51.274 1.642 104.302 1.642 104.302 0 72.573 58.833 131.405 131.406 131.405 0 0 46.455 1.643 94.447 1.643 51.274 0 105.944-1.643 105.944-1.643 72.573 0 129.762-57.189 129.762-129.762 0 0 1.643-52.43 1.643-102.66-0.001-49.136-1.644-99.376-1.644-99.376z m-41.54 194c0 59.511-36.744 96.254-96.254 96.254 0 0-54.98 1.348-97.026 1.348-39.353 0-87.302-1.348-87.302-1.348-59.51 0-97.896-38.387-97.896-97.895 0 0-1.347-53.339-1.347-95.383 0-39.354 1.347-88.945 1.347-88.945 0-59.51 38.388-96.254 97.896-96.254 0 0 50.598-1.347 91.343-1.347 40.744 0 92.985 1.347 92.985 1.347 59.51 0 96.253 36.743 96.253 96.254 0 0 1.348 51.348 1.348 91.637-0.001 41.188-1.348 94.333-1.348 94.333zM634.471 360.02c-15.888 0-28.768 12.944-28.768 28.91s12.88 28.91 28.768 28.91 28.767-12.944 28.767-28.91c0-15.967-12.88-28.91-28.767-28.91z" fill="#FFFFFF" p-id="9262"></path></svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128" id="instagram">
+  <defs>
+    <clipPath id="b">
+      <circle cx="64" cy="64" r="64" fill="none"></circle>
+    </clipPath>
+    <clipPath id="c">
+      <path fill="none" d="M104-163H24a24.07 24.07 0 0 0-24 24v80a24.07 24.07 0 0 0 24 24h80a24.07 24.07 0 0 0 24-24v-80a24.07 24.07 0 0 0-24-24Zm16 104a16 16 0 0 1-16 16H24A16 16 0 0 1 8-59v-80a16 16 0 0 1 16-16h80a16 16 0 0 1 16 16Z"></path>
+    </clipPath>
+    <clipPath id="e">
+      <circle cx="82" cy="209" r="5" fill="none"></circle>
+    </clipPath>
+    <clipPath id="g">
+      <path fill="none" d="M64-115a16 16 0 0 0-16 16 16 16 0 0 0 16 16 16 16 0 0 0 16-16 16 16 0 0 0-16-16Zm0 24a8 8 0 0 1-8-8 8 8 0 0 1 8-8 8 8 0 0 1 8 8 8 8 0 0 1-8 8Z"></path>
+    </clipPath>
+    <clipPath id="h">
+      <path fill="none" d="M84-63H44a16 16 0 0 1-16-16v-40a16 16 0 0 1 16-16h40a16 16 0 0 1 16 16v40a16 16 0 0 1-16 16Zm-40-64a8 8 0 0 0-8 8v40a8 8 0 0 0 8 8h40a8 8 0 0 0 8-8v-40a8 8 0 0 0-8-8Z"></path>
+    </clipPath>
+    <clipPath id="i">
+      <circle cx="82" cy="-117" r="5" fill="none"></circle>
+    </clipPath>
+    <radialGradient id="a" cx="27.5" cy="121.5" r="137.5" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd676"></stop>
+      <stop offset=".25" stop-color="#f2a454"></stop>
+      <stop offset=".38" stop-color="#f05c3c"></stop>
+      <stop offset=".7" stop-color="#c22f86"></stop>
+      <stop offset=".96" stop-color="#6666ad"></stop>
+      <stop offset=".99" stop-color="#5c6cb2"></stop>
+    </radialGradient>
+    <radialGradient xlink:href="#a" id="d" cx="27.5" cy="-41.5" r="148.5"></radialGradient>
+    <radialGradient xlink:href="#a" id="f" cx="13.87" cy="303.38" r="185.63"></radialGradient>
+    <radialGradient xlink:href="#a" id="j" cx="13.87" cy="-22.62" r="185.63"></radialGradient>
+  </defs>
+  <g clip-path="url(#b)">
+    <circle cx="27.5" cy="121.5" r="137.5" fill="url(#a)"></circle>
+  </g>
+  <g clip-path="url(#c)">
+    <circle cx="27.5" cy="-41.5" r="148.5" fill="url(#d)"></circle>
+  </g>
+  <g clip-path="url(#e)">
+    <circle cx="13.87" cy="303.38" r="185.63" fill="url(#f)"></circle>
+  </g>
+  <g clip-path="url(#g)">
+    <circle cx="27.5" cy="-41.5" r="148.5" fill="url(#d)"></circle>
+  </g>
+  <g clip-path="url(#h)">
+    <circle cx="27.5" cy="-41.5" r="148.5" fill="url(#d)"></circle>
+  </g>
+  <g clip-path="url(#i)">
+    <circle cx="13.87" cy="-22.62" r="185.63" fill="url(#j)"></circle>
+  </g>
+  <circle cx="82" cy="46" r="5" fill="#fff"></circle>
+  <path fill="#fff" d="M64 48a16 16 0 1 0 16 16 16 16 0 0 0-16-16Zm0 24a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z"></path>
+  <rect width="64" height="64" x="32" y="32" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="8" rx="12" ry="12"></rect>
+</svg>
