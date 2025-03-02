@@ -588,6 +588,72 @@
                     }, 200); // Reduced debounce time
                 };
 
+                // New function to rebuild all params at once
+                const rebuildAllParams = () => {
+                    // Clear all existing params
+                    params.value = "";
+                    const newParams = new URLSearchParams();
+                    
+                    // Add background
+                    if (background.value) {
+                        newParams.set("img", background.value.slice(1));
+                    }
+                    
+                    // Add text color
+                    const colorMatch = text_color.value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+                    if (colorMatch) {
+                        const [, r, g, b, a = 1] = colorMatch;
+                        newParams.set("color", `${r},${g},${b},${a}`);
+                    }
+                    
+                    // Add background color
+                    const bgMatch = bg_color.value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+                    if (bgMatch) {
+                        const [, r, g, b, a = 1] = bgMatch;
+                        newParams.set("bg", `${r},${g},${b},${a}`);
+                    }
+                    
+                    // Add date
+                    if (date.value) {
+                        newParams.set("date", date.value);
+                    }
+                    
+                    // Add text values
+                    if (str.value) {
+                        newParams.set("str", str.value
+                            .replace(/\&/gm, "{%amp%}")
+                            .replace(/\</gm, "{%lt%}")
+                            .replace(/\>/gm, "{%gt%}"));
+                    }
+                    
+                    if (quote.value) {
+                        newParams.set("quote", quote.value
+                            .replace(/\&/gm, "{%amp%}")
+                            .replace(/\</gm, "{%lt%}")
+                            .replace(/\>/gm, "{%gt%}"));
+                    }
+                    
+                    if (counter.value) {
+                        newParams.set("counter", counter.value
+                            .replace(/\&/gm, "{%amp%}")
+                            .replace(/\</gm, "{%lt%}")
+                            .replace(/\>/gm, "{%gt%}"));
+                    }
+                    
+                    // Add social values
+                    for (let i = 0; i < social.value.length; i++) {
+                        if (social.value[i]) {
+                            newParams.set(icons[i], social.value[i]
+                                .replace(/\&/gm, "{%amp%}")
+                                .replace(/\</gm, "{%lt%}")
+                                .replace(/\>/gm, "{%gt%}"));
+                        }
+                    }
+                    
+                    // Update params
+                    params.value = newParams.toString();
+                };
+
                 // Added handler for social input to ensure immediate update
                 const handleSocialInput = () => {
                     // Update immediately instead of waiting for watch
@@ -647,7 +713,16 @@
                     }
                 };
 
-                // Link parser functionality
+                // Helper function to decode URL parameters
+                const decodeURLParam = (value) => {
+                    if (!value) return '';
+                    return value
+                        .replace(/\{%amp%\}/g, '&')
+                        .replace(/\{%lt%\}/g, '<')
+                        .replace(/\{%gt%\}/g, '>');
+                };
+
+                // Updated parseLink function to immediately refresh everything
                 const parseLink = () => {
                     if (!linkToParse.value) {
                         ElementPlus.ElMessage.warning('请输入要解析的链接');
@@ -658,6 +733,9 @@
                         // Extract the query string
                         const url = new URL(linkToParse.value);
                         const urlParams = new URLSearchParams(url.search);
+                        
+                        // Clear all debounce timers
+                        clearTimeout(debounceTimer.value);
                         
                         // Update all fields
                         if (urlParams.has('img')) {
@@ -709,7 +787,8 @@
                         });
                         social.value = newSocial;
                         
-                        // Force image refresh immediately after parsing
+                        // Force rebuild params and update image immediately
+                        rebuildAllParams();
                         updateImage();
                         
                         ElementPlus.ElMessage.success('链接解析成功');
@@ -719,17 +798,11 @@
                     }
                 };
                 
-                // Helper function to decode URL parameters
-                const decodeURLParam = (value) => {
-                    if (!value) return '';
-                    return value
-                        .replace(/\{%amp%\}/g, '&')
-                        .replace(/\{%lt%\}/g, '<')
-                        .replace(/\{%gt%\}/g, '>');
-                };
-                
-                // Reset all fields
+                // Updated resetAll function to use the same pattern
                 const resetAll = () => {
+                    // Clear all debounce timers
+                    clearTimeout(debounceTimer.value);
+                    
                     background.value = "#1";
                     text_color.value = "rgba(0, 0, 0, 1)";
                     bg_color.value = "rgba(0, 0, 0, 0)";
@@ -740,7 +813,8 @@
                     social.value = Array(icons.length).fill("");
                     linkToParse.value = "";
                     
-                    // Force image refresh immediately after reset
+                    // Force rebuild params and update image immediately
+                    rebuildAllParams();
                     updateImage();
                     
                     ElementPlus.ElMessage.success('所有设置已重置');
