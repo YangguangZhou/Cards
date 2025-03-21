@@ -8,7 +8,6 @@
   <img src="https://img.shields.io/github/last-commit/YangguangZhou/Cards?style=flat-square" alt="last commit">
   <img src="https://img.shields.io/github/languages/top/YangguangZhou/Cards?style=flat-square" alt="top language">
   <img src="https://img.shields.io/github/languages/code-size/YangguangZhou/Cards?style=flat-square" alt="code size">
-  <a href="https://cards.jerryz.com.cn/"><img src="https://img.shields.io/website?down_color=red&down_message=离线&style=flat-square&up_color=green&up_message=在线&url=https%3A%2F%2Fcards.jerryz.com.cn%2F" alt="website-status"></a>
 </p>
 
 <p align="center">基于 Vercel Serverless 和 Node.js 开发的个人名片生成服务</p>
