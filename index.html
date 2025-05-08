@@ -5,18 +5,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cards Editor | Jerry Zhou</title>
+
+    <title>Cards Editor - 免费在线个人名片生成器 | Jerry Zhou</title>
+
+    <meta name="description" content="使用 Cards Editor 轻松在线制作和自定义您的个人名片。支持多种背景、颜色、社交媒体链接，并实时预览。免费生成可嵌入的电子名片，适用于 GitHub、个人网站等。">
+
+    <meta name="keywords" content="个人名片, 在线名片制作, 电子名片, 名片生成器, 自定义名片, 个性化名片, 免费名片工具, Jerry Zhou, Cards Editor">
+
+    <meta name="author" content="Jerry Zhou">
+
+    <link rel="canonical" href="https://cards.jerryz.com.cn/" />
+
+    <meta property="og:title" content="Cards Editor - 免费在线个人名片生成器 | Jerry Zhou">
+    <meta property="og:description" content="使用 Cards Editor 轻松在线制作和自定义您的个人名片。支持多种背景、颜色、社交媒体链接，并实时预览。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cards.jerryz.com.cn/">
+    <meta property="og:image" content="https://card.jerryz.com.cn/white">
+    <meta property="og:site_name" content="Cards Editor | Jerry Zhou">
+    <meta property="og:locale" content="zh_CN">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cards Editor - 免费在线个人名片生成器 | Jerry Zhou">
+    <meta name="twitter:description" content="使用 Cards Editor 轻松在线制作和自定义您的个人名片。支持多种背景、颜色、社交媒体链接，并实时预览。">
+    <meta name="twitter:image" content="https://card.jerryz.com.cn/white">
     <link type="favicon" rel="shortcut icon" href="https://jerryz.com.cn/favicon.png" />
-    <!-- Modern frameworks: Vue 3 + Element Plus + Tailwind CSS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/index.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/index.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/element-plus/2.3.8/locale/zh-cn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Noto+Serif+SC:wght@400;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Add analytics scripts -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2597042766299857" crossorigin="anonymous"></script>
     <script defer src="https://umami.jerryz.com.cn/script.js" data-website-id="c9d59c30-6944-47a6-aac0-70b4b3e54005"></script>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Cards Editor - 个人名片生成器",
+      "description": "在线制作和自定义个人名片，支持多种样式和社交媒体链接。",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5 support",
+      "url": "https://cards.jerryz.com.cn/",
+      "creator": {
+        "@type": "Person",
+        "name": "Jerry Zhou"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://cards.jerryz.com.cn/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "image": "https://card.jerryz.com.cn/white", // 建议替换为编辑器截图或logo
+      "keywords": "个人名片, 在线名片制作, 电子名片, 名片生成器, 自定义名片"
+    }
+    </script>
+
     <style>
         /* Global Styles */
         :root {
@@ -103,7 +152,7 @@
         }
         
         /* Typography */
-        .title {
+        .title { /* This is the H1 */
             font-family: 'Nunito', 'Noto Serif SC', sans-serif;
             text-align: center;
             font-size: 2.5rem;
@@ -122,7 +171,7 @@
             line-height: 1.5;
         }
         
-        .section-title {
+        .section-title { /* These are H2s */
             font-size: 1.25rem;
             margin-bottom: var(--spacing-md);
             color: var(--primary-dark);
@@ -396,9 +445,9 @@
             Cards是一个简单易用的个人名片生成工具，可以帮助你创建精美的个人名片，支持自定义背景、文本、社交媒体等，适合分享到各个社交平台。
         </p>
 
-        <section class="image-section">
-            <div class="image-container">
-                <el-image class="preview-image" :src="image" @click="openImage" fit="cover">
+        <section class="image-section" aria-labelledby="preview-heading">
+            <h2 id="preview-heading" class="visually-hidden">个人名片预览</h2> <div class="image-container">
+                <el-image class="preview-image" :src="image" @click="openImage" fit="cover" alt="生成的个人名片预览">
                     <template #placeholder>
                         <div style="display: flex; justify-content: center; align-items: center; height: 300px; background-color: #f5f7fa;">
                             <el-icon style="font-size: 30px;"><i class="el-icon-loading"></i></el-icon>
@@ -408,26 +457,27 @@
             </div>
 
             <div class="image-link-container">
-                <div class="image-link" @click="copyToClipboard">
+                <div class="image-link" @click="copyToClipboard" role="button" tabindex="0" aria-label="复制生成的名片链接">
                     <span :id="'link'" ref="linkText">{{ image }}</span>
                 </div>
             </div>
         </section>
 
-        <section class="parser-section">
-            <h2 class="section-title">链接解析</h2>
+        <section class="parser-section" aria-labelledby="parser-heading">
+            <h2 class="section-title" id="parser-heading">链接解析</h2>
             <div class="card">
                 <div class="link-parser">
                     <el-input 
                         v-model="linkToParse" 
                         placeholder="输入Cards链接进行解析" 
+                        aria-label="输入要解析的Cards链接"
                         style="flex-grow: 1;">
                     </el-input>
                     <div class="parser-buttons">
-                        <el-button type="primary" @click="parseLink">
+                        <el-button type="primary" @click="parseLink" aria-label="解析链接">
                             解析
                         </el-button>
-                        <el-button type="danger" @click="resetAll">
+                        <el-button type="danger" @click="resetAll" aria-label="重置所有设置">
                             重置
                         </el-button>
                     </div>
@@ -435,76 +485,82 @@
             </div>
         </section>
 
-        <section>
-            <h2 class="section-title">基本设置</h2>
+        <section aria-labelledby="basic-settings-heading">
+            <h2 class="section-title" id="basic-settings-heading">基本设置</h2>
             <div class="card">
                 <div class="form-container">
                     <div class="form-group">
-                        <label>背景图片</label>
-                        <el-radio-group v-model="background" fill="#3B82F6">
-                            <el-radio-button label="#1"></el-radio-button>
-                            <el-radio-button label="#2"></el-radio-button>
-                            <el-radio-button label="#3"></el-radio-button>
-                            <el-radio-button label="#4"></el-radio-button>
-                            <el-radio-button label="#5"></el-radio-button>
+                        <label for="background-selector">背景图片</label>
+                        <el-radio-group v-model="background" fill="#3B82F6" id="background-selector" aria-label="选择背景图片">
+                            <el-radio-button label="#1">1</el-radio-button>
+                            <el-radio-button label="#2">2</el-radio-button>
+                            <el-radio-button label="#3">3</el-radio-button>
+                            <el-radio-button label="#4">4</el-radio-button>
+                            <el-radio-button label="#5">5</el-radio-button>
                         </el-radio-group>
                     </div>
 
                     <div class="form-group">
-                        <label>文字颜色</label>
+                        <label for="text-color-picker">文字颜色</label>
                         <el-color-picker 
+                            id="text-color-picker"
                             v-model="text_color" 
                             show-alpha 
-                            :predefine="['rgba(0, 0, 0, 1)', 'rgba(255, 255, 255, 1)', 'rgba(59, 130, 246, 1)', 'rgba(236, 72, 153, 1)']">
+                            :predefine="['rgba(0, 0, 0, 1)', 'rgba(255, 255, 255, 1)', 'rgba(59, 130, 246, 1)', 'rgba(236, 72, 153, 1)']"
+                            aria-label="选择文字颜色">
                         </el-color-picker>
                     </div>
 
                     <div class="form-group">
-                        <label>背景颜色</label>
+                        <label for="bg-color-picker">背景颜色</label>
                         <el-color-picker 
+                            id="bg-color-picker"
                             v-model="bg_color" 
                             show-alpha
-                            :predefine="['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, 0.8)', 'rgba(59, 130, 246, 0.2)', 'rgba(236, 72, 153, 0.2)']">
+                            :predefine="['rgba(0, 0, 0, 0)', 'rgba(255, 255, 255, 0.8)', 'rgba(59, 130, 246, 0.2)', 'rgba(236, 72, 153, 0.2)']"
+                            aria-label="选择背景颜色">
                         </el-color-picker>
                     </div>
 
                     <div class="form-group">
-                        <label>目标日期</label>
+                        <label for="date-picker">目标日期</label>
                         <el-date-picker 
+                            id="date-picker"
                             v-model="date" 
                             type="date" 
                             placeholder="选择日期" 
                             format="YYYY 年 MM 月 DD 日"
                             value-format="YYYY-MM-DD"
+                            aria-label="选择目标日期"
                             style="width: 100%">
                         </el-date-picker>
                     </div>
 
                     <div class="form-group">
-                        <label>日期文本</label>
-                        <el-input v-model="str" :placeholder="str_placeholder"></el-input>
+                        <label for="date-text">日期文本</label>
+                        <el-input id="date-text" v-model="str" :placeholder="str_placeholder" aria-label="输入日期文本"></el-input>
                     </div>
 
                     <div class="form-group">
-                        <label>底部文本</label>
-                        <el-input v-model="quote" placeholder="永远相信美好的事情即将发生✨"></el-input>
+                        <label for="quote-text">底部文本</label>
+                        <el-input id="quote-text" v-model="quote" placeholder="永远相信美好的事情即将发生✨" aria-label="输入底部引用文本"></el-input>
                     </div>
 
                     <div class="form-group">
-                        <label>访问量统计</label>
-                        <el-input v-model="counter" placeholder="Cards"></el-input>
+                        <label for="counter-text">访问量统计</label>
+                        <el-input id="counter-text" v-model="counter" placeholder="Cards" aria-label="输入用于访问量统计的标识"></el-input>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="social-section">
-            <h2 class="section-title">社交账号</h2>
+        <section class="social-section" aria-labelledby="social-accounts-heading">
+            <h2 class="section-title" id="social-accounts-heading">社交账号</h2>
             <div class="card">
                 <div class="social-container">
                     <div class="social-item" v-for="(icon, index) in icons" :key="icon">
-                        <el-image class="social-icon" :src="'https://cards.jerryz.com.cn/res/icon/' + icon + '.svg'"></el-image>
-                        <el-input v-model="social[index]" :placeholder="icon" @input="handleSocialInput"></el-input>
+                        <el-image class="social-icon" :src="'https://cards.jerryz.com.cn/res/icon/' + icon + '.svg'" :alt="icon + ' 社交媒体图标'"></el-image>
+                        <el-input v-model="social[index]" :placeholder="icon" @input="handleSocialInput" :aria-label="'输入您的 ' + icon + ' 账号信息'"></el-input>
                     </div>
                 </div>
             </div>
@@ -521,13 +577,13 @@
             </div>
 
             <div class="copyright">
-                Copyright &copy; 2021-2024 <a href="https://jerryz.com.cn" target="_blank" rel="noopener noreferrer">Jerry Zhou</a>
+                Copyright &copy; 2021-2025 <a href="https://jerryz.com.cn" target="_blank" rel="noopener noreferrer">Jerry Zhou</a>
                 <br>
                 <a href="https://github.com/YangguangZhou/Cards" target="_blank" rel="noopener">GitHub</a>
             </div>
         </footer>
     </div>
-
+    <style>.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }</style>
     <script>
         const baseURL = "https://cards.jerryz.com.cn/api";
         const { createApp, ref, computed, watch, onMounted } = Vue;
@@ -574,7 +630,7 @@
                     clearTimeout(debounceTimer.value);
                     debounceTimer.value = setTimeout(() => {
                         setParam(key, value);
-                    }, 200); // Reduced debounce time
+                    }, 200); 
                 };
 
                 const updateImage = () => {
@@ -585,40 +641,33 @@
                     clearTimeout(debounceTimer.value);
                     debounceTimer.value = setTimeout(() => {
                         updateImage();
-                    }, 200); // Reduced debounce time
+                    }, 200); 
                 };
 
-                // New function to rebuild all params at once
                 const rebuildAllParams = () => {
-                    // Clear all existing params
                     params.value = "";
                     const newParams = new URLSearchParams();
                     
-                    // Add background
                     if (background.value) {
                         newParams.set("img", background.value.slice(1));
                     }
                     
-                    // Add text color
                     const colorMatch = text_color.value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
                     if (colorMatch) {
                         const [, r, g, b, a = 1] = colorMatch;
                         newParams.set("color", `${r},${g},${b},${a}`);
                     }
                     
-                    // Add background color
                     const bgMatch = bg_color.value.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
                     if (bgMatch) {
                         const [, r, g, b, a = 1] = bgMatch;
                         newParams.set("bg", `${r},${g},${b},${a}`);
                     }
                     
-                    // Add date
                     if (date.value) {
                         newParams.set("date", date.value);
                     }
                     
-                    // Add text values
                     if (str.value) {
                         newParams.set("str", str.value
                             .replace(/\&/gm, "{%amp%}")
@@ -640,7 +689,6 @@
                             .replace(/\>/gm, "{%gt%}"));
                     }
                     
-                    // Add social values
                     for (let i = 0; i < social.value.length; i++) {
                         if (social.value[i]) {
                             newParams.set(icons[i], social.value[i]
@@ -650,22 +698,18 @@
                         }
                     }
                     
-                    // Update params
                     params.value = newParams.toString();
                 };
 
-                // Added handler for social input to ensure immediate update
                 const handleSocialInput = () => {
-                    // Update immediately instead of waiting for watch
                     for (let i = 0; i < social.value.length; i++) {
                         setParam(icons[i], social.value[i]);
                     }
-                    updateImage(); // Update image immediately
+                    updateImage(); 
                 };
 
                 const openImage = () => {
                     window.open(image.value, "_blank");
-                    // Track analytics if umami exists
                     if (typeof umami !== 'undefined') {
                         umami.track('generate', { open: image.value });
                     }
@@ -675,14 +719,14 @@
                     element.classList.add('fade-in');
                     setTimeout(() => {
                         element.classList.remove('fade-in');
-                    }, 200); // Reduced animation time
+                    }, 200); 
                 };
 
                 const fadeOut = (element) => {
                     element.classList.add('fade-out');
                     setTimeout(() => {
                         element.classList.remove('fade-out');
-                    }, 200); // Reduced animation time
+                    }, 200); 
                 };
 
                 const copyToClipboard = () => {
@@ -706,14 +750,12 @@
                             ElementPlus.ElMessage.error('复制失败，请手动复制');
                         });
                         
-                        // Track analytics if umami exists
                         if (typeof umami !== 'undefined') {
                             umami.track('generate', { copy: image.value });
                         }
                     }
                 };
 
-                // Helper function to decode URL parameters
                 const decodeURLParam = (value) => {
                     if (!value) return '';
                     return value
@@ -722,7 +764,6 @@
                         .replace(/\{%gt%\}/g, '>');
                 };
 
-                // Updated parseLink function to immediately refresh everything
                 const parseLink = () => {
                     if (!linkToParse.value) {
                         ElementPlus.ElMessage.warning('请输入要解析的链接');
@@ -730,16 +771,15 @@
                     }
                     
                     try {
-                        // Extract the query string
                         const url = new URL(linkToParse.value);
                         const urlParams = new URLSearchParams(url.search);
                         
-                        // Clear all debounce timers
                         clearTimeout(debounceTimer.value);
                         
-                        // Update all fields
                         if (urlParams.has('img')) {
                             background.value = "#" + urlParams.get('img');
+                        } else {
+                            background.value = "#1"; // Default if not present
                         }
                         
                         if (urlParams.has('color')) {
@@ -749,6 +789,8 @@
                             } else if (color.length === 4) {
                                 text_color.value = `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`;
                             }
+                        } else {
+                             text_color.value = "rgba(0, 0, 0, 1)"; // Default
                         }
                         
                         if (urlParams.has('bg')) {
@@ -758,36 +800,23 @@
                             } else if (bg.length === 4) {
                                 bg_color.value = `rgba(${bg[0]}, ${bg[1]}, ${bg[2]}, ${bg[3]})`;
                             }
+                        } else {
+                            bg_color.value = "rgba(0, 0, 0, 0)"; // Default
                         }
                         
-                        if (urlParams.has('date')) {
-                            date.value = urlParams.get('date');
-                        }
+                        date.value = urlParams.get('date') || (new Date().getFullYear() + "-12-31");
+                        str.value = decodeURLParam(urlParams.get('str')) || "";
+                        quote.value = decodeURLParam(urlParams.get('quote')) || "";
+                        counter.value = decodeURLParam(urlParams.get('counter')) || "";
                         
-                        if (urlParams.has('str')) {
-                            str.value = decodeURLParam(urlParams.get('str'));
-                        }
-                        
-                        if (urlParams.has('quote')) {
-                            quote.value = decodeURLParam(urlParams.get('quote'));
-                        }
-                        
-                        if (urlParams.has('counter')) {
-                            counter.value = decodeURLParam(urlParams.get('counter'));
-                        }
-                        
-                        // Parse social icons
-                        const newSocial = [...social.value];
+                        const newSocial = Array(icons.length).fill("");
                         icons.forEach((icon, index) => {
                             if (urlParams.has(icon)) {
                                 newSocial[index] = decodeURLParam(urlParams.get(icon));
-                            } else {
-                                newSocial[index] = '';
                             }
                         });
                         social.value = newSocial;
                         
-                        // Force rebuild params and update image immediately
                         rebuildAllParams();
                         updateImage();
                         
@@ -798,9 +827,7 @@
                     }
                 };
                 
-                // Updated resetAll function to use the same pattern
                 const resetAll = () => {
-                    // Clear all debounce timers
                     clearTimeout(debounceTimer.value);
                     
                     background.value = "#1";
@@ -813,14 +840,13 @@
                     social.value = Array(icons.length).fill("");
                     linkToParse.value = "";
                     
-                    // Force rebuild params and update image immediately
                     rebuildAllParams();
                     updateImage();
                     
                     ElementPlus.ElMessage.success('所有设置已重置');
                 };
                 
-                // Watch
+                // Watchers
                 watch(background, (newVal) => {
                     debouncedSetParam("img", newVal.slice(1));
                 });
@@ -830,7 +856,6 @@
                 });
                 
                 watch(text_color, (newVal) => {
-                    // Extract rgba values
                     const match = newVal.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
                     if (match) {
                         const [, r, g, b, a = 1] = match;
@@ -839,7 +864,6 @@
                 });
                 
                 watch(bg_color, (newVal) => {
-                    // Extract rgba values
                     const match = newVal.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
                     if (match) {
                         const [, r, g, b, a = 1] = match;
@@ -865,11 +889,10 @@
                         debouncedSetParam("counter", newVal);
                     } else {
                         ElementPlus.ElMessage.error('输入不合法！合法字符包括：英文字母、数字、下划线、连字符、点号以及常见的特殊字符');
-                        counter.value = '';
+                        counter.value = newVal.slice(0, -1); // Revert to previous valid state or clear
                     }
                 });
                 
-                // Watch is still needed for programmatic changes, but handleSocialInput provides immediate updates
                 watch(social, (newVal) => {
                     for (let i = 0; i < newVal.length; i++) {
                         debouncedSetParam(icons[i], newVal[i]);
@@ -877,7 +900,14 @@
                 }, { deep: true });
                 
                 onMounted(() => {
-                    updateImage();
+                    // Try to parse URL params on initial load if any
+                    const currentUrlParams = new URLSearchParams(window.location.search);
+                    if (currentUrlParams.toString()) {
+                        linkToParse.value = window.location.href;
+                        parseLink();
+                    } else {
+                        updateImage();
+                    }
                 });
                 
                 return {
@@ -903,12 +933,10 @@
             }
         });
         
-        // Use Element Plus with Chinese locale
         app.use(ElementPlus, {
             locale: ElementPlus.zhCn
         });
         
-        // Mount the app
         app.mount('#app');
     </script>
 </body>
