@@ -108,7 +108,6 @@ function getWeekday() {
 }
 
 async function getCounter(req) {
-    const url = "https://counter-sever.jerryz.com.cn/counter";
     const { default: fetch } = await import('node-fetch');
     const name = getParam("counter");
 
@@ -117,13 +116,8 @@ async function getCounter(req) {
         return 0; // 返回 0 表示没有访问计数
     }
 
-    const result = await (await fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name }),
-    })).json();
+    const url = `https://counter-sever.jerryz.com.cn/counter?name=${encodeURIComponent(name)}`;
+    const result = await (await fetch(url)).json();
 
     const counterView = result.times;
     return counterView;
